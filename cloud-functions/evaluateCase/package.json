@@ -1,0 +1,9 @@
+{
+  "name": "evaluateCase",
+  "version": "1.0.0",
+  "description": "AI 判案云函数 - 通过 https 调用 DeepSeek API 生成判词（零外部依赖）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}
