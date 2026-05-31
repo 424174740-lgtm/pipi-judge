@@ -1,0 +1,22 @@
+/* 主题色变量 */
+:root {
+  --primary: #FF8C00;
+  --primary-light: #FFA940;
+  --primary-dark: #CC6600;
+  --bg: #FFF5E6;
+  --card-bg: #FFFFFF;
+  --text-dark: #333333;
+  --text-gray: #666666;
+  --text-light: #999999;
+  --border: #FFD699;
+  --danger: #D4380D;
+  --success: #52C41A;
+  --shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+  --radius: 16rpx;
+  --radius-sm: 10rpx;
+  --font-size-sm: 26rpx;
+  --font-size-base: 28rpx;
+  --font-size-lg: 32rpx;
+  --font-size-xl: 36rpx;
+  --font-size-title: 40rpx;
+}
