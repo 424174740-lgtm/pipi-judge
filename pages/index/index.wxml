@@ -1,0 +1,166 @@
+<view class="page index-page">
+  <!-- 猫猫法官头部 -->
+  <view class="hero">
+    <image class="cat-avatar" src="/images/cat-avatar.png" mode="aspectFill" lazy-load="false"></image>
+    <view class="hero-title">皮皮法官</view>
+    <view class="hero-subtitle">情侣吵架不用慌，猫猫法官帮你评理喵！</view>
+  </view>
+
+  <!-- 模式切换开关 -->
+  <view class="mode-toggle">
+    <view
+      class="mode-option {{mode === 'single' ? 'mode-active' : ''}}"
+      data-mode="single" bindtap="switchMode"
+    >单人描述 <text class="mode-hint">⚡ 快速评理</text></view>
+    <view
+      class="mode-option {{mode === 'dual' ? 'mode-active' : ''}}"
+      data-mode="dual" bindtap="switchMode"
+    >双方陈述 <text class="mode-hint">🔍 全面视角</text></view>
+  </view>
+
+  <!-- ========== 单人描述模式 ========== -->
+  <view wx:if="{{mode === 'single'}}">
+    <view class="input-card card">
+      <view class="input-label">📝 描述你们的争吵内容</view>
+      <view class="input-hint">💡 写清楚【事情经过+你的感受】，法官判案更准哦~</view>
+      <textarea
+        class="input-textarea {{text.length > 1500 ? 'textarea-warn' : ''}}"
+        placeholder="例如：她因为我忘了纪念日生气了，我觉得她小题大做… 说清楚前因后果，本法庭才好断案喵～"
+        value="{{text}}"
+        bindinput="onInput"
+        maxlength="2000"
+      />
+      <view class="char-count {{text.length > 1500 ? 'char-warn' : ''}}">
+        <text wx:if="{{text.length > 1500 && text.length <= 1900}}" class="char-hint-text">⚠️ 字数快到上限啦，尽量精简哦~</text>
+        <text wx:elif="{{text.length > 1900}}" class="char-hint-text">⚠️ 已达上限边缘，请精简~</text>
+        {{text.length}}/2000
+      </view>
+    </view>
+
+    <!-- 上传聊天截图区域 -->
+    <view class="ocr-entry" wx:if="{{!imageLocalPath && !imageUploading}}">
+      <view class="ocr-btn" bindtap="onPickImage">
+        <text class="ocr-icon">📷</text>
+        <text class="ocr-text">上传聊天截图</text>
+      </view>
+    </view>
+
+    <!-- 上传中 -->
+    <view class="ocr-loading" wx:if="{{imageUploading}}">
+      <text class="ocr-spinner">⏳</text>
+      <text class="ocr-text">正在上传聊天截图…</text>
+    </view>
+
+    <!-- 截图缩略图 -->
+    <view class="ocr-thumb-wrap" wx:if="{{imageLocalPath && !imageUploading}}">
+      <image class="ocr-thumb" src="{{imageLocalPath}}" mode="aspectFill" />
+      <view class="ocr-thumb-del" bindtap="onClearImage">✕</view>
+    </view>
+
+    <!-- 单人模式提交按钮 -->
+    <view wx:if="{{text.length === 0 && !imageFileID}}" class="submit-btn btn-disabled" bindtap="onSubmit">⚖️ 提交审理</view>
+    <view wx:else class="submit-btn" hover-class="submit-btn-press" bindtap="onSubmit">
+      {{text.length > 0 && imageFileID ? '⚖️ 提交文字+截图审理' : text.length > 0 ? '⚖️ 提交审理' : '📷 提交截图审理'}}
+    </view>
+  </view>
+
+  <!-- ========== 双方陈述模式 ========== -->
+  <view wx:else class="dual-section">
+    <!-- 填写进度条 -->
+    <view class="dual-progress-wrap fade-in-up">
+      <view class="dual-progress-bar">
+        <view class="dual-progress-fill" style="width: {{dualProgress}}%"></view>
+      </view>
+      <view class="dual-progress-label">{{dualProgressText}}</view>
+    </view>
+
+    <!-- A 方卡片 -->
+    <view class="party-card">
+      <view class="party-header party-a-header">
+        <view class="party-badge party-badge-a">A 方</view>
+        <text class="party-label">我</text>
+      </view>
+      <view class="party-body">
+        <view class="field-group">
+          <view class="field-label">📖 事情经过（我这边的视角）</view>
+          <textarea
+            class="textarea-dual {{a_what.length > 750 ? 'textarea-warn' : ''}}"
+            placeholder="比如：我买错了牛奶，她就直接不理我了… 说清楚时间、地点、起因喵"
+            value="{{a_what}}"
+            bindinput="onDualInput"
+            data-field="a_what"
+            maxlength="1000"
+          />
+          <view class="char-count {{a_what.length > 750 ? 'char-warn' : ''}}">
+            <text wx:if="{{a_what.length > 750}}" class="char-hint-text">⚠️</text>
+            {{a_what.length}}/1000
+          </view>
+        </view>
+        <view class="field-group">
+          <view class="field-label">💬 我的感受</view>
+          <textarea
+            class="textarea-dual {{a_feel.length > 750 ? 'textarea-warn' : ''}}"
+            placeholder="我被气到不想说话… 当时心里是什么感觉？"
+            value="{{a_feel}}"
+            bindinput="onDualInput"
+            data-field="a_feel"
+            maxlength="1000"
+          />
+          <view class="char-count {{a_feel.length > 750 ? 'char-warn' : ''}}">
+            <text wx:if="{{a_feel.length > 750}}" class="char-hint-text">⚠️</text>
+            {{a_feel.length}}/1000
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- B 方卡片 -->
+    <view class="party-card">
+      <view class="party-header party-b-header">
+        <view class="party-badge party-badge-b">B 方</view>
+        <text class="party-label">对象 / 朋友</text>
+      </view>
+      <view class="party-body">
+        <view class="field-group">
+          <view class="field-label">📖 对方视角的事情经过</view>
+          <textarea
+            class="textarea-dual {{b_what.length > 750 ? 'textarea-warn' : ''}}"
+            placeholder="从对方的角度看事情：Ta 可能觉得我不够在乎…"
+            value="{{b_what}}"
+            bindinput="onDualInput"
+            data-field="b_what"
+            maxlength="1000"
+          />
+          <view class="char-count {{b_what.length > 750 ? 'char-warn' : ''}}">
+            <text wx:if="{{b_what.length > 750}}" class="char-hint-text">⚠️</text>
+            {{b_what.length}}/1000
+          </view>
+        </view>
+        <view class="field-group">
+          <view class="field-label">💬 对方的感受</view>
+          <textarea
+            class="textarea-dual {{b_feel.length > 750 ? 'textarea-warn' : ''}}"
+            placeholder="换位思考一下：Ta 为什么这么生气？背后是什么情绪？"
+            value="{{b_feel}}"
+            bindinput="onDualInput"
+            data-field="b_feel"
+            maxlength="1000"
+          />
+          <view class="char-count {{b_feel.length > 750 ? 'char-warn' : ''}}">
+            <text wx:if="{{b_feel.length > 750}}" class="char-hint-text">⚠️</text>
+            {{b_feel.length}}/1000
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 双方模式提交按钮（动态文字） -->
+    <view wx:if="{{dualBtnDisabled}}" class="submit-btn btn-disabled" bindtap="onSubmit">{{dualBtnText}}</view>
+    <view wx:else class="submit-btn" hover-class="submit-btn-press" bindtap="onSubmit">{{dualBtnText}}</view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer-text">
+    <text>🐾 AI 法官在线评理 · 仅供娱乐</text>
+  </view>
+</view>
