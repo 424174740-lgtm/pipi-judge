@@ -1,0 +1,32 @@
+<view class="page loading-page">
+  <!-- 猫猫动画 -->
+  <view class="cat-section">
+    <view class="cat-circle cat-spin">
+      <image class="cat-avatar-loading" src="/images/cat-avatar.png" mode="aspectFill"></image>
+    </view>
+    <view class="thought-row">
+      <view class="cat-thought">{{statusText}}</view>
+      <text class="gavel-icon">🐾</text>
+    </view>
+  </view>
+
+  <!-- 进度条 -->
+  <view class="progress-section">
+    <view class="progress-track">
+      <view class="progress-fill" style="width: {{progress}}%"></view>
+    </view>
+    <view class="progress-label">
+      <text class="progress-text">{{progressText}}</text>
+    </view>
+  </view>
+
+  <!-- 装饰文案 -->
+  <view class="decorative-text">
+    <text wx:for="{{decorativeLines}}" wx:key="index" class="deco-line {{index === currentDeco ? 'deco-active' : ''}}">
+      {{item}}
+    </text>
+  </view>
+
+  <!-- 取消按钮 -->
+  <button class="cancel-btn" bindtap="onCancel">取消审理</button>
+</view>
