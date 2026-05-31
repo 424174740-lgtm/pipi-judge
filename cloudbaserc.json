@@ -1,0 +1,14 @@
+{
+  "envId": "YOUR_CLOUD_ENV_ID",
+  "functionRoot": "cloud-functions",
+  "functions": [
+    {
+      "name": "evaluateCase",
+      "timeout": 60,
+      "envVariables": {
+        "DEEPSEEK_API_KEY": "YOUR_DEEPSEEK_API_KEY",
+        "TZ": "Asia/Shanghai"
+      }
+    }
+  ]
+}
