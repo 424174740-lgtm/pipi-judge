@@ -1,0 +1,110 @@
+<view class="page result-page">
+  <!-- 顶部猫猫签名 -->
+  <view class="result-header fade-in-up">
+    <image class="header-avatar" src="/images/cat-avatar.png" mode="aspectFill"></image>
+    <view class="header-title">皮皮法官 · 判决书</view>
+    <view class="header-sub">🐾 本案经猫爪盖章生效，不服来挠 ⚖️</view>
+  </view>
+
+  <!-- 责任比例进度条 -->
+  <view class="responsibility-card fade-in-up" style="animation-delay: 0.05s" wx:if="{{judgment.responsibility}}">
+    <view class="resp-title">
+      <text class="resp-title-icon">⚖️</text>
+      <text class="resp-title-text">责任比例</text>
+    </view>
+    <view class="resp-bar-area">
+      <view class="resp-bar-track">
+        <view class="resp-bar-fill resp-bar-fill-a" style="width: {{judgment.responsibility.aPercent}}%"></view>
+        <view class="resp-bar-fill resp-bar-fill-b" style="width: {{judgment.responsibility.bPercent}}%"></view>
+      </view>
+      <view class="resp-labels">
+        <view class="resp-label-side">
+          <text class="resp-label-name">{{respSideLabelA}}</text>
+          <text class="resp-label-pct resp-label-pct-a">{{judgment.responsibility.aPercent}}%</text>
+        </view>
+        <view class="resp-label-side resp-label-right">
+          <text class="resp-label-pct resp-label-pct-b">{{judgment.responsibility.bPercent}}%</text>
+          <text class="resp-label-name">{{respSideLabelB}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 判词卡片区域 -->
+  <view class="judgment-cards">
+    <!-- 案件回顾 -->
+    <view class="judge-card card fade-in-up" style="animation-delay: 0.1s" wx:if="{{judgment.caseReview}}">
+      <view class="card-label">
+        <text class="label-icon">📋</text>
+        <text class="label-text">案件回顾</text>
+      </view>
+      <view class="card-body">{{judgment.caseReview}}</view>
+    </view>
+
+    <!-- 猫猫判词 -->
+    <view class="judge-card card fade-in-up" style="animation-delay: 0.2s" wx:if="{{judgment.catJudgment}}">
+      <view class="card-label">
+        <text class="label-icon">⚖️</text>
+        <text class="label-text">猫猫判词</text>
+      </view>
+      <view class="card-body">{{judgment.catJudgment}}</view>
+    </view>
+
+    <!-- 终审判决（高亮卡片） -->
+    <view class="verdict-card fade-in-up" style="animation-delay: 0.3s" wx:if="{{judgment.finalVerdict}}">
+      <view class="verdict-label">
+        <text class="label-icon">🏆</text>
+        <text class="label-text">终审判决</text>
+      </view>
+      <view class="verdict-body">{{judgment.finalVerdict}}</view>
+    </view>
+
+    <!-- 惩罚措施 -->
+    <view class="judge-card card fade-in-up" style="animation-delay: 0.4s" wx:if="{{judgment.punishment}}">
+      <view class="card-label">
+        <text class="label-icon">🎯</text>
+        <text class="label-text">惩罚措施</text>
+      </view>
+      <view class="card-body">{{judgment.punishment}}</view>
+    </view>
+
+    <!-- 悄悄话 -->
+    <view class="whisper-card fade-in-up" style="animation-delay: 0.5s" wx:if="{{judgment.whisper}}">
+      <view class="card-label">
+        <text class="label-icon">💌</text>
+        <text class="label-text">本庭的悄悄话</text>
+      </view>
+      <view class="whisper-body">{{judgment.whisper}}</view>
+    </view>
+
+    <!-- 签名 -->
+    <view class="signature fade-in-up" style="animation-delay: 0.6s">
+      <text class="signature-line">—— 皮皮法官 按爪 🐾</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-bar">
+    <button class="action-btn primary-btn" bindtap="onGeneratePoster">
+      <text>🖼️ 生成海报</text>
+    </button>
+    <button class="action-btn secondary-btn" bindtap="onRetry">
+      <text>🔄 重新审理</text>
+    </button>
+  </view>
+
+  <!-- Canvas（隐藏，用于生成海报） -->
+  <canvas id="posterCanvas" class="poster-canvas" type="2d"></canvas>
+
+  <!-- 海报预览弹窗 -->
+  <view class="modal-mask {{showPosterModal ? 'modal-show' : ''}}" bindtap="onClosePoster" wx:if="{{showPosterModal}}">
+    <view class="modal-content" catchtap="noop">
+      <image class="poster-preview" src="{{posterTempPath}}" mode="widthFix" />
+      <view class="modal-actions">
+        <button class="action-btn secondary-btn" bindtap="onSavePoster">💾 保存到相册</button>
+        <button class="action-btn primary-btn" bindtap="onSharePoster">📤 转发给好友</button>
+      </view>
+      <view class="modal-close" bindtap="onClosePoster">关闭</view>
+    </view>
+  </view>
+</view>
