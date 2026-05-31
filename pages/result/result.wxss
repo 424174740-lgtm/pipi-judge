@@ -1,0 +1,303 @@
+/* 结果页样式 */
+.result-page {
+  padding-bottom: 40rpx;
+}
+
+/* 顶部头部 */
+.result-header {
+  text-align: center;
+  padding: 30rpx 0 40rpx;
+}
+
+.header-avatar {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  margin-bottom: 16rpx;
+  border: 4rpx solid #FFFFFF;
+  box-shadow: 0 4rpx 20rpx rgba(255, 140, 0, 0.15);
+}
+
+.header-title {
+  font-size: var(--font-size-title);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10rpx;
+}
+
+.header-sub {
+  font-size: var(--font-size-sm);
+  color: var(--text-light);
+}
+
+/* ========== 责任比例进度条 ========== */
+.responsibility-card {
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  padding: 28rpx 30rpx;
+  margin-bottom: 24rpx;
+}
+
+.resp-title {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 24rpx;
+}
+
+.resp-title-icon {
+  font-size: 32rpx;
+}
+
+.resp-title-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.resp-bar-track {
+  width: 100%;
+  height: 32rpx;
+  border-radius: 16rpx;
+  background: #F0F0F0;
+  display: flex;
+  overflow: hidden;
+}
+
+.resp-bar-fill-a {
+  height: 100%;
+  background: linear-gradient(135deg, #FF8C00, #FFB347);
+  border-radius: 16rpx 0 0 16rpx;
+  transition: width 0.6s ease;
+}
+
+.resp-bar-fill-b {
+  height: 100%;
+  background: linear-gradient(135deg, #5B8FF9, #85AFFF);
+  border-radius: 0 16rpx 16rpx 0;
+  transition: width 0.6s ease;
+}
+
+.resp-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+
+.resp-label-side {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.resp-label-right {
+  flex-direction: row-reverse;
+}
+
+.resp-label-name {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.resp-label-pct {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.resp-label-pct-a {
+  color: #FF8C00;
+}
+
+.resp-label-pct-b {
+  color: #5B8FF9;
+}
+
+/* 判词卡片区域 */
+.judgment-cards {
+  margin-bottom: 30rpx;
+}
+
+/* 普通判词卡片 */
+.judge-card {
+  padding: 28rpx 30rpx;
+}
+
+.card-label {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.label-icon {
+  font-size: 32rpx;
+}
+
+.label-text {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.card-body {
+  font-size: var(--font-size-base);
+  color: var(--text-dark);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 终审判决 - 高亮卡片 */
+.verdict-card {
+  background: linear-gradient(135deg, #FFF5E6, #FFF0E0);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  border-left: 6rpx solid var(--primary);
+}
+
+.verdict-label {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.verdict-body {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: #D4380D;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 悄悄话 - 温柔卡片 */
+.whisper-card {
+  background: #FFFBF0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28rpx 30rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx dashed var(--border);
+}
+
+.whisper-body {
+  font-size: var(--font-size-base);
+  color: #666;
+  line-height: 1.8;
+  font-style: italic;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 签名 */
+.signature {
+  text-align: right;
+  padding: 20rpx 0 40rpx;
+}
+
+.signature-line {
+  font-size: var(--font-size-base);
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* 底部操作栏 */
+.action-bar {
+  display: flex;
+  gap: 20rpx;
+  padding: 0 0 60rpx;
+}
+
+.action-btn {
+  flex: 1;
+  height: 88rpx;
+  border-radius: 44rpx;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(255, 140, 0, 0.25);
+}
+
+.primary-btn:active {
+  transform: scale(0.97);
+}
+
+.secondary-btn {
+  background: var(--card-bg);
+  color: var(--text-dark);
+  border: 2rpx solid var(--border);
+}
+
+.secondary-btn:active {
+  background: #F5F0EB;
+}
+
+/* Canvas（隐藏） */
+.poster-canvas {
+  position: fixed;
+  left: -9999rpx;
+  top: -9999rpx;
+  width: 540px;
+  height: 960px;
+}
+
+/* 海报预览弹窗 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.modal-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  width: 80%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster-preview {
+  width: 100%;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 40rpx rgba(0, 0, 0, 0.3);
+  margin-bottom: 30rpx;
+}
+
+.modal-actions {
+  width: 100%;
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.modal-close {
+  font-size: var(--font-size-base);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 16rpx 40rpx;
+}
